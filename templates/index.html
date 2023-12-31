@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İleride Eklenecekler</title>
+</head>
+<body>
+    <h1>İleride Eklenecekler Dashboard</h1>
+
+    <h2>Kişi başı onaylananlar</h2>
+    {% for approver, approved_songs in approver_approved_songs.items() %}
+        <h3>{{ approver_names.get(approver, approver) }} tarafından onaylananlar:</h3>
+        <ul>
+             {% for song in approved_songs %}
+                {% if approver == "T+" %}
+                    <li style="color: red">{{ song }}</li>
+                {% elif approver == "Y+" %}
+                    <li style="color: blue">{{ song }}</li>
+                {% elif approver == "C+" %}
+                    <li style="color: green">{{ song }}</li>
+                {% elif approver == "B+" %}
+                    <li style="color: darkgoldenrod">{{ song }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
+    <h2>Onaylama Sayıları:</h2>
+    <ul>
+        {% for approver, count in approvals_count.items() %}
+         <li>{{ approver_names.get(approver, approver) }} {{ count }} şarkıyı onayladı</li>
+
+        {% endfor %}
+    </ul>
+
+    <h2>Herkes tarafından onaylananlar</h2>
+    <ul>
+        {% for song in songs_approved_by_everyone %}
+            <li style="color: darkturquoise">{{ song }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Bahanesiz onaylananlar:</h2>
+    <ul>
+        {% for song in songs_approved_by_everyone_no_parentheses %}
+            <li style="color: magenta">{{ song }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Çift artılılar:</h2>
+    <ul>
+        {% for song, double_plussed_approver in double_plussed_songs_info %}
+            <li style="color: greenyellow">{{ song }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
